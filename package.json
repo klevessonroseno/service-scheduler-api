@@ -4,5 +4,12 @@
   "main": "index.js",
   "repository": "https://github.com/klevessonroseno/service-scheduler-api.git",
   "author": "klevessonroseno <klevessonroseno42@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sucrase": "^3.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
 }
