@@ -10,5 +10,4 @@ routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
 
-
 export default routes;
