@@ -3,6 +3,12 @@ import User from '../models/User';
 class UserController {
     async store(req, res) {
         try {
+            if(!req.body.name || !req.body.email || !req.body.password){
+                return res.status(400).json({
+                    error: 'The name, email and password attributes are required'
+                });
+            }
+
             const userExists = await User.findOne({
                 where: { email: req.body.email }
             });
