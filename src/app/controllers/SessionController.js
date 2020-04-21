@@ -7,7 +7,15 @@ class SessionController {
         try {
             const { email, password } = req.body;
 
+            if(!email || !password) return res.status(400).json({
+                error: 'Email and password are required'
+            });
+
             const user = await User.findOne({ where: { email }});
+    
+            if(!user) return res.status(404).json({
+                error: 'User not found'
+            });
     
             if(!(await user.checkPassword(password))) return res.status(401).json({
                 error: 'Password does not math'
@@ -25,7 +33,6 @@ class SessionController {
                     expiresIn: authConfig.expireIn,
                 }),
             });
-            
         } catch (error) {
             res.status(500).json(error);
         }
