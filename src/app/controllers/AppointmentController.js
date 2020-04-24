@@ -1,8 +1,37 @@
 import Appointment from '../models/Appointment';
+import User from '../models/User';
+import * as Yup from 'yup';
 
 class AppointmentController {
     async store(req, res){
+        try {
+            const { provider_id, date } = req.body;
 
+            const checkIsProvider = await User.findOne({
+                where: { id: provider_id, provider: true },
+            });
+
+            /**
+             * Checking if provider_id is a provider
+             */
+
+            if(!checkIsProvider){
+                return res.status(401).json({
+                    error: 'You can only create appointments with providers',
+                });
+            }
+
+            const appointment = await Appointment.create({
+                user_id: req.userId,
+                provider_id,
+                date,
+            });
+
+            return res.status(201).json(appointment);
+
+        } catch (error) {
+            
+        }
     }
 }
 
