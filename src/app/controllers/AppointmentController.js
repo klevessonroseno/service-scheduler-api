@@ -10,7 +10,7 @@ class AppointmentController {
                 date: Yup.date().required(),
             });
 
-            if(!(await schema.isValid(schema))) return res.status(400).json({
+            if(!(await schema.isValid(req.body))) return res.status(400).json({
                 error: 'Validation Fails',
             });
 
