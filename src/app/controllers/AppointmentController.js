@@ -1,6 +1,7 @@
+import { startOfHour, parseISO, isBefore } from  'date-fns';
+import * as Yup from 'yup';
 import Appointment from '../models/Appointment';
 import User from '../models/User';
-import * as Yup from 'yup';
 
 class AppointmentController {
     async store(req, res){
