@@ -7,6 +7,7 @@ import File from '../models/File';
 class AppointmentController {
     async index(req, res){
         try {
+            const { page = 1 } = req.query;
             /**
              *  Listing all schedules for ordinary users
              */
