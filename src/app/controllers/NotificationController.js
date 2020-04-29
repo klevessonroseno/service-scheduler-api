@@ -3,19 +3,24 @@ import User from '../models/User';
 
 class NotificationController {
     async index(req, res){
-        const checkUserProvider = await User.findOne({
-            where: { id: req.userId, provider: true },
-        });
+        try {
+            const checkUserProvider = await User.findOne({
+                where: { id: req.userId, provider: true },
+            });
+    
+            if(!checkUserProvider) return res.status(401).json({
+                error: 'Only providers can load notifications',
+            });
+    
+            const notifications = await Notification.find({
+                user: req.userId, 
+            }).sort({ createdAt: 'desc' }).limit(20);
+    
+            return res.status(200).json(notifications);
 
-        if(!checkUserProvider) return res.status(401).json({
-            error: 'Only providers can load notifications',
-        });
-
-        const notifications = await Notification.find({
-            user: req.userId, 
-        }).sort({ createdAt: 'desc' }).limit(20);
-
-        return res.status(200).json(notifications);
+        } catch (error) {
+            return res.status(500).json(error);
+        }
     }
 }
 
