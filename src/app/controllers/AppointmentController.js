@@ -135,7 +135,8 @@ class AppointmentController {
         try {
             
         } catch (error) {
-            
+            const appointment = await Appointment.findByPk(req.params.id);
+
         }
     }
 }
