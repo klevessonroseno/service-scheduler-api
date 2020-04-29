@@ -130,6 +130,14 @@ class AppointmentController {
             
         }
     }
+    
+    async delete(req, res){
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
 }
 
 export default new AppointmentController();
