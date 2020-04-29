@@ -22,6 +22,10 @@ class NotificationController {
             return res.status(500).json(error);
         }
     }
+
+    async update(req, res){
+        return;
+    }
 }
 
 export default new NotificationController();
