@@ -74,6 +74,14 @@ class AppointmentController {
             }
 
             /**
+             * Checking if the user id is the same as the provider id
+             */
+
+            if(checkIsProvider.id === req.userId) return res.status(401).json({
+                error: 'You cannot create an appointment with yourself',
+            });
+
+            /**
              * Check for past dates
              */
 
