@@ -1,4 +1,4 @@
-import { startOfHour, parseISO, isBefore, format } from  'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from  'date-fns';
 import pt from 'date-fns/locale/pt'
 import * as Yup from 'yup';
 import Appointment from '../models/Appointment';
@@ -141,6 +141,12 @@ class AppointmentController {
 
             if(appointment.canceled_at) return res.status(401).json({
                 error: 'This appointment has been deleted',
+            });
+
+            const dateWithSub = subHours(appointment.date, 2);
+
+            if(isBefore(dateWithSub, new Date())) return res.status(401).json({
+                error: 'You can only cancel appointment 2 hours in advance', 
             });
 
             appointment.canceled_at = new Date();
