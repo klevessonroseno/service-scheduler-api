@@ -10,7 +10,7 @@ const models = [User, File, Appointment];
 class Database {
     constructor() {
         this.init();
-        //this.mongo();
+        this.mongo();
     }
 
     init() {
@@ -20,13 +20,13 @@ class Database {
             .map(model => model.init(this.connection))
             .map(model => model.associate && model.associate(this.connection.models));
     }
-/*
+
     mongo(){
         this.mongoConnection = mongoose.connect(
             'mongodb://localhost:27017/scheduler',
             { useNewUrlParser: true, useFindAndModify: true },
         );
-    }*/
+    }
 }
 
 export default new Database();
